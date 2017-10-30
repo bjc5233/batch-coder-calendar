@@ -1,4 +1,4 @@
-@echo off& mode 86,36& call lib\loadE.bat CurS echox image setWT& call lib\load.bat _parseArray _getRandomNum _getRandomNum2 _randomColor _getLF& setlocal enabledelayedexpansion& title 程序员日历
+@echo off& mode 86,36& call loadE.bat CurS echox image setWT& call load.bat _parseArray _getRandomNum _getRandomNum2 _randomColor _getLF& setlocal enabledelayedexpansion& title 程序员日历
 %CurS% /crv 0& %setWT% 程序员日历,180& cd data
 echo "%image%"
 pause

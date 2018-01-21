@@ -1,7 +1,5 @@
 @echo off& mode 86,36& call loadE.bat CurS echox image setWT& call load.bat _parseArray _getRandomNum _getRandomNum2 _randomColor _getLF& setlocal enabledelayedexpansion& title 程序员日历
 %CurS% /crv 0& %setWT% 程序员日历,180& cd data
-echo "%image%"
-pause
 ::参考 http://runjs.cn/code/ydp3it7b
 call :init
 for /l %%i in () do (%_randomColor%)& call :makeup& call :draw& pause>nul
@@ -39,9 +37,7 @@ goto :EOF
 
 :makeup
 for /f "tokens=1,2,3,4 delims=/ " %%a in ("%date%") do set year=%%a& set month=%%b& set day=%%c& set week=%%d
-::###############
 (%_call% ("1 54 facialExpressionIndex") %_getRandomNum%)
-::###############
 (%_call% ("2 4 goodActivityNum") %_getRandomNum%)& (%_call% ("2 4 badActivityNum") %_getRandomNum%)& set /a curActivityNum=goodActivityNum+badActivityNum
 (%_call% ("1 %activityMax% %curActivityNum% pickActivityIndexStr") %_getRandomNum2%)
 set /a goodKeyWordLine=goodActivityNum+1& set /a badKeyWordLine=badActivityNum+1& set goodActivityStr=│        │                                !LF!& set badActivityStr=│        │                                !LF!& set pickActivityIndex=1& set pickGoodActivityIndex=1& set pickBadActivityIndex=1
@@ -56,12 +52,10 @@ for %%i in (%pickActivityIndexStr%) do (
     set /a pickActivityIndex+=1
 )
 set goodActivityStr=!goodActivityStr:~0,-1!& set badActivityStr=!badActivityStr:~0,-1!
-::###############
 (%_call% ("0 %direction.maxIndex% directionIndex") %_getRandomNum%)
-::###############
 (%_call% ("1 %drinkMax% 2 pickDrinkMaxIndexStr") %_getRandomNum2%)
 set drinkStr=& (for %%i in (%pickDrinkMaxIndexStr%) do set drinkStr=!drinkStr!，!drink[%%i]!)& set drinkStr=!drinkStr:~1!
-::###############
+
 (%_call% ("0 %girlMaxStar% girlLikeStar") %_getRandomNum%)
 set /a girlUnLikeStar=girlMaxStar-girlLikeStar& set girlStarStr=& (for /l %%i in (!girlLikeStar!, -1, 1) do set girlStarStr=!girlStarStr!★)& (for /l %%i in (!girlUnLikeStar!, -1, 1) do set girlStarStr=!girlStarStr!☆)
 goto :EOF
